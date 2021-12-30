@@ -1430,7 +1430,7 @@ $(function () {
                             x: args.x !== undefined ? absolute(state.x, args.x) : state.x,
                             y: args.y !== undefined ? absolute(state.y, args.y) : state.y,
                             z: args.z !== undefined ? absolute(state.z, args.z) : state.z,
-                            e: args.s !== undefined ? absolute(state.e, args.s) : state.e,
+                            e: args.e !== undefined ? absolute(state.e, args.e) : state.e,
                             f: args.f !== undefined ? absolute(state.f, args.f) : state.f,
                         };
                         //Layer change detection is or made by watching Z, it's made by watching when we extrude at a new Z position
@@ -1448,8 +1448,8 @@ $(function () {
                         //    addSegment(state, line);//only if extruding right now.
 
                         //If E is defined in the args then extruding. Todo. is this right?
-                        if(args.s !== undefined)
-                            this.addSegment(state, line);//only if extruding right now.
+                        // if(args.e !== undefined)
+                        this.addSegment(state, line);//only if extruding right now.
                         state = line;
                     } else if (cmd === 'G2' || cmd === 'G3') {
                         //G2/G3 - Arc Movement ( G2 clock wise and G3 counter clock wise )
@@ -1474,7 +1474,7 @@ $(function () {
                                 r: args.r !== undefined ? args.r : null,
                                 // What is this K I'm seeing here, lol
                                 //k: args.k !== undefined ? absolute( state.k, args.k ) : state.k,
-                                e: args.s !== undefined ? absolute( state.e, args.s ) : state.e,
+                                e: args.e !== undefined ? absolute( state.e, args.e ) : state.e,
                                 f: args.f !== undefined ? absolute( state.f, args.f ) : state.f,
                                 is_clockwise: cmd === 'G2'
                             };
@@ -1512,7 +1512,7 @@ $(function () {
                         line.x = args.x !== undefined ? args.x : line.x;
                         line.y = args.y !== undefined ? args.y : line.y;
                         line.z = args.z !== undefined ? args.z : line.z;
-                        line.e = args.s !== undefined ? args.s : line.e;
+                        line.e = args.e !== undefined ? args.e : line.e;
                         state = line;
                     } else {
                         //console.warn( 'THREE.GCodeLoader: Command not supported:' + cmd );
