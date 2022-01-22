@@ -1406,6 +1406,19 @@ $(function () {
                         //console.log(lines[i])
                     }
 
+                    lines[i] = lines[i].replace("G", " G");
+                    lines[i] = lines[i].replace("M", " M");
+                    lines[i] = lines[i].replace("S", " S");
+                    lines[i] = lines[i].replace("F", " F");
+                    lines[i] = lines[i].replace("X", " X");
+                    lines[i] = lines[i].replace("Y", " Y");
+                    lines[i] = lines[i].replace("Z", " Z");
+
+                    while (lines[i].includes("  ")) {
+                      lines[i] = lines[i].replace("  ", " ");
+                    }
+
+                    lines[i] = lines[i].trim();
 
                     //remove comments and process command part of line.
                     var tokens = lines[i].replace(/;.+/g, '').split(' ');
@@ -1424,23 +1437,27 @@ $(function () {
                         }
                     });
 
+                    if (cmd.startsWith("S")) {
+                      state.e = parseFloat(cmd.replace("S", ""));
+                    }
+
                     //G0/G1 - Linear Movement
                     if (cmd === 'G0' || cmd === 'G1') {
                         var line = {
                             x: args.x !== undefined ? absolute(state.x, args.x) : state.x,
                             y: args.y !== undefined ? absolute(state.y, args.y) : state.y,
-                            z: args.z !== undefined ? absolute(state.z, args.z) : state.z,
-                            e: args.e !== undefined ? absolute(state.e, args.e) : state.e,
+                            z: args.z !== undefined ? absolute(state.z, args.z * -1) : state.z,
+                            e: args.s !== undefined ? absolute(state.e, args.s) : state.e,
                             f: args.f !== undefined ? absolute(state.f, args.f) : state.f,
                         };
                         //Layer change detection is or made by watching Z, it's made by watching when we extrude at a new Z position
-                        if (delta(state.e, line.e) > 0) {
-                            var diff = delta(state.e, line.e);
-                            line.extruding = delta(state.e, line.e) > 0;
+                        // if (delta(state.e, line.e) > 0) {
+                            // var diff = delta(state.e, line.e);
+                            // line.extruding = delta(state.e, line.e) > 0;
                             if (currentLayer == undefined || line.z != currentLayer.z) {
                                 newLayer(line);
                             }
-                        }
+                        // }
 
                         //make sure extruding is updated. might not be needed.
                         //line.extruding = delta(state.e, line.e) > 0;
