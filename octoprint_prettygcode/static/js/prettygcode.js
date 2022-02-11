@@ -1446,7 +1446,7 @@ $(function () {
                         var line = {
                             x: args.x !== undefined ? absolute(state.x, args.x) : state.x,
                             y: args.y !== undefined ? absolute(state.y, args.y) : state.y,
-                            z: args.z !== undefined ? absolute(state.z, args.z * -1) : state.z,
+                            z: args.z !== undefined ? absolute(state.z, args.z) : state.z,
                             e: args.s !== undefined ? absolute(state.e, args.s) : state.e,
                             f: args.f !== undefined ? absolute(state.f, args.f) : state.f,
                         };
