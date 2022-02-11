@@ -1202,7 +1202,7 @@ $(function () {
                 var dist = Math.max(Math.abs(bsize.x), Math.abs(bsize.y)) / 2;
                 dist=Math.max(20,dist);//min distance to model.
                 //console.log(dist)
-                cameraControls.dollyTo(dist * 2.0 ,true);
+//                 cameraControls.dollyTo(dist * 2.0 ,true);
             }
 
             function addObject(layer, extruding) {
@@ -1889,9 +1889,9 @@ $(function () {
             if(!cameraControls)//Make sure controls exist.
                 return;
 
-            if (bedVolume.origin == "lowerleft")
-                cameraControls.setTarget(bedVolume.width / 2, bedVolume.depth / 2, 0, false);
-            else
+//             if (bedVolume.origin == "lowerleft")
+//                 cameraControls.setTarget(bedVolume.width / 2, bedVolume.depth / 2, 0, false);
+//             else
                 cameraControls.setTarget(0, 0, 0, false);
         }
 
